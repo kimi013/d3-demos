@@ -52,27 +52,28 @@ class BasicDemo3 extends Component {
             .call(d3.axisLeft(yScale));
 
         // 渲染柱子
+        // path知识: https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths
         group.selectAll('.path')
             .data(data)
             .enter()
             .append('path')
             .attr('class', 'path')
-            .attr('d', () => {
+            .attr('d', () => {         // “上、右、左”的顺序画出路径
                 let arr = [];
                 let a = {};
                 a.centerX = xScale.bandwidth() / 2;
                 a.centerY = 1;
                 a.end = xScale.bandwidth();
-                arr.push('M' + (a.centerX + 20));
+                arr.push('M ' + (a.centerX + 20));
                 arr.push(' ');
                 arr.push(0);
-                arr.push(' L' + a.centerX * 2);
+                arr.push(' L ' + a.centerX * 2);
                 arr.push(' ');
                 arr.push(a.centerY);
                 arr.push(' ');
-                arr.push('L0 ');
+                arr.push('L 0 ');
                 arr.push(a.centerY);
-                arr.push('Z');
+                arr.push(' Z');
                 return arr.join('');
             })
             .attr('transform', (d) => {
@@ -89,16 +90,16 @@ class BasicDemo3 extends Component {
                 a.centerX = xScale.bandwidth() / 2;
                 a.centerY = height - yScale(d.value);
                 a.end = xScale.bandwidth();
-                arr.push('M' + a.centerX);
+                arr.push('M ' + a.centerX);
                 arr.push(' ');
                 arr.push(0);
                 arr.push(' L' + a.centerX * 2);
                 arr.push(' ');
                 arr.push(a.centerY);
                 arr.push(' ');
-                arr.push('L0 ');
+                arr.push('L 0 ');
                 arr.push(a.centerY);
-                arr.push('Z');
+                arr.push(' Z');
                 return arr.join('');
             })
             .attr('transform', (d) => {
