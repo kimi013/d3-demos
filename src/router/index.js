@@ -42,6 +42,12 @@ const BasicDemo3 = Loadable({
     loading: Loading
 });
 
+// 动态滚动条
+const DynamicLoadingBar = Loadable({
+    loader: () => import ('../components/dynamicLoadingBar'),
+    loading: Loading
+});
+
 class AppRouter extends Component {
     render() {
         return (
@@ -55,6 +61,7 @@ class AppRouter extends Component {
                         <li className="nav-item"><Link to="/basicDemo1">基础图表一</Link></li>
                         <li className="nav-item"><Link to="/basicDemo2">基础图表二</Link></li>
                         <li className="nav-item"><Link to="/basicDemo3">基础图表三</Link></li>
+                        <li className="nav-item"><Link to="/dynamicLoadingBar">动态滚动条</Link></li>
                     </ul>
 
                     <div className="router-container">
@@ -65,6 +72,7 @@ class AppRouter extends Component {
                             <Route exact path="/basicDemo1" component={BasicDemo1}/>
                             <Route exact path="/basicDemo2" component={BasicDemo2}/>
                             <Route exact path="/basicDemo3" component={BasicDemo3}/>
+                            <Route exact path="/dynamicLoadingBar" component={DynamicLoadingBar}/>
                         </Switch>
                     </div>
 
