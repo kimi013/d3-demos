@@ -1,6 +1,6 @@
 /**
- * Area chart
- * 来源: https://bl.ocks.org/mbostock/3883195
+ * Line chart
+ * 来源: https://bl.ocks.org/mbostock/3883245
  * Created by liuyang on 2018/3/8.
  */
 import React, {
@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import * as d3 from 'd3';
 
-class AreaChart extends Component {
+class LineChart extends Component {
     componentDidMount() {
         var margin = {
             top: 20,
@@ -17,7 +17,7 @@ class AreaChart extends Component {
             left: 50
         };
 
-        var svg = d3.select('#areaChart')
+        var svg = d3.select('#lineChart')
             .append('svg')
             .attr('width', 600)
             .attr('height', 600);
@@ -28,31 +28,32 @@ class AreaChart extends Component {
         var g = svg.append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-        var x = d3.scaleTime()                // x轴
-                .rangeRound([0, width]),
-            y = d3.scaleLinear()              // y轴
-                .rangeRound([height, 0]);
+        // x scale 未添加domain
+        var x = d3.scaleTime()
+            .rangeRound([0, width]);
 
-        // https://github.com/d3/d3-shape/blob/master/README.md#area
-        var area = d3.area()
+        // y scale 未添加domain
+        var y = d3.scaleLinear()
+            .rangeRound([height, 0]);
+
+
+        var line = d3.line()
             .x(function (d) {
                 return x(d.date);
             })
-            .y1(function (d) {
-                return y(d.close)
+            .y(function (d) {
+                return y(d.close);
             });
 
         d3.tsv('/data/areaChart.tsv', function (d) {
-            // https://github.com/d3/d3-time-format/blob/master/README.md#timeParse
             d.date = d3.timeParse('%d-%b-%y')(d.date);
             d.close = +d.close;
             return d;
         }, function (err, data) {
-            if (err) {
+            if(err) {
                 throw err;
             }
 
-            // https://github.com/d3/d3-array/blob/master/README.md#extent
             x.domain(d3.extent(data, function (d) {
                 return d.date;
             }));
@@ -61,44 +62,47 @@ class AreaChart extends Component {
                 return d.close;
             })]);
 
-            area.y0(y(0));
-
-            // 画曲线
-            g.append('path')
-                .datum(data)
-                .attr('fill', 'steelblue')
-                .attr('d', area);
-
             // 画x轴
             g.append('g')
-                .attr('transform', 'translate(0, ' + height + ')')
+                .attr('transform', 'translate(0' + ',' + height + ')')
                 .call(d3.axisBottom(x));
 
             // 画y轴
             g.append('g')
                 .call(d3.axisLeft(y))
                 .append('text')
+                .text('Price ($)')
                 .attr('fill', '#000')
                 .attr('transform', 'rotate(-90)')
                 .attr('y', 6)
                 .attr('dy', '0.71em')
-                .attr('text-anchor', 'end')
-                .text('Price ($)');
+                .attr('text-anchor', 'end');
+
+
+            // 画曲线
+            g.append('path')
+                .datum(data)
+                .attr('fill', 'none')
+                .attr('stroke', 'steelblue')
+                .attr('stroke-linejoin', 'round')
+                .attr('stroke-linecap', 'round')
+                .attr('stroke-width', 1.5)
+                .attr('d', line);
         });
     }
 
     render() {
         return (
-            <div id="areaChart"
+            <div id="lineChart"
                  className="basic-demo">
-                <h3>Area Chart</h3>
+                <h3>Line Chart</h3>
                 <p className="sub-title">
                     来源：
-                    <a href="https://bl.ocks.org/mbostock/3883195">官网实例</a>
+                    <a href="https://bl.ocks.org/mbostock/3883245">官网实例</a>
                 </p>
             </div>
         )
     }
 }
 
-export default AreaChart;
+export default LineChart;

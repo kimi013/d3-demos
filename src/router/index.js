@@ -54,6 +54,12 @@ const AreaChart = Loadable({
     loading: Loading
 });
 
+// line chart
+const LineChart = Loadable({
+    loader: () => import ('../components/lineChart'),
+    loading: Loading
+});
+
 class AppRouter extends Component {
     render() {
         return (
@@ -72,6 +78,7 @@ class AppRouter extends Component {
                             <a href="https://github.com/d3/d3/wiki/Gallery">官网实例汇总</a>
                         </li>
                         <li className="nav-item"><Link to="/areaChart">Area Chart</Link></li>
+                        <li className="nav-item"><Link to="/lineChart">Line Chart</Link></li>
 
                     </ul>
 
@@ -85,6 +92,7 @@ class AppRouter extends Component {
                             <Route exact path="/basicDemo3" component={BasicDemo3}/>
                             <Route exact path="/dynamicLoadingBar" component={DynamicLoadingBar}/>
                             <Route exact path="/areaChart" component={AreaChart}/>
+                            <Route exact path="/lineChart" component={LineChart}/>
                         </Switch>
                     </div>
 
