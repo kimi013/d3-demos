@@ -48,6 +48,12 @@ const DynamicLoadingBar = Loadable({
     loading: Loading
 });
 
+// area chart
+const AreaChart = Loadable({
+    loader: () => import ('../components/areaChart'),
+    loading: Loading
+});
+
 class AppRouter extends Component {
     render() {
         return (
@@ -62,6 +68,11 @@ class AppRouter extends Component {
                         <li className="nav-item"><Link to="/basicDemo2">基础图表二</Link></li>
                         <li className="nav-item"><Link to="/basicDemo3">基础图表三</Link></li>
                         <li className="nav-item"><Link to="/dynamicLoadingBar">动态滚动条</Link></li>
+                        <li className="nav-item">
+                            <a href="https://github.com/d3/d3/wiki/Gallery">官网实例汇总</a>
+                        </li>
+                        <li className="nav-item"><Link to="/areaChart">Area Chart</Link></li>
+
                     </ul>
 
                     <div className="router-container">
@@ -73,6 +84,7 @@ class AppRouter extends Component {
                             <Route exact path="/basicDemo2" component={BasicDemo2}/>
                             <Route exact path="/basicDemo3" component={BasicDemo3}/>
                             <Route exact path="/dynamicLoadingBar" component={DynamicLoadingBar}/>
+                            <Route exact path="/areaChart" component={AreaChart}/>
                         </Switch>
                     </div>
 
