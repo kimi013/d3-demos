@@ -32,7 +32,7 @@ class DynamicLoadingBar extends Component {
         const picture = svg.append('g')
             .attr('transform', 'translate(300, 300)');
 
-        const background = picture.append('path')
+        picture.append('path')
         // selection.datum方法
         // https://github.com/d3/d3-selection/blob/master/README.md#selection_datum
             .datum({
@@ -48,7 +48,7 @@ class DynamicLoadingBar extends Component {
             .style('fill', /*'#2ef4ff'*/'red')
             .attr('d', arcGenerator);
 
-        const dataText = picture.append('text')
+        picture.append('text')
             .text(12)
             // svg中text元素的属性
             .attr('text-anchor', 'middle')

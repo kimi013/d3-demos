@@ -60,6 +60,12 @@ const LineChart = Loadable({
     loading: Loading
 });
 
+// bivariate area chart
+const BivariateAreaChart = Loadable({
+    loader: () => import ('../components/bivariateAreaChart'),
+    loading: Loading
+});
+
 class AppRouter extends Component {
     render() {
         return (
@@ -79,6 +85,7 @@ class AppRouter extends Component {
                         </li>
                         <li className="nav-item"><Link to="/areaChart">Area Chart</Link></li>
                         <li className="nav-item"><Link to="/lineChart">Line Chart</Link></li>
+                        <li className="nav-item"><Link to="/bivariateAreaChart">Bivariate Area Chart</Link></li>
 
                     </ul>
 
@@ -93,6 +100,7 @@ class AppRouter extends Component {
                             <Route exact path="/dynamicLoadingBar" component={DynamicLoadingBar}/>
                             <Route exact path="/areaChart" component={AreaChart}/>
                             <Route exact path="/lineChart" component={LineChart}/>
+                            <Route exact path="/bivariateAreaChart" component={BivariateAreaChart}/>
                         </Switch>
                     </div>
 

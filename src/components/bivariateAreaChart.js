@@ -1,6 +1,6 @@
 /**
- * Area chart
- * 来源: https://bl.ocks.org/mbostock/3883195
+ * Bivariate area chart
+ * 来源: https://bl.ocks.org/mbostock/3884914
  * Created by liuyang on 2018/3/8.
  */
 import React, {
@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import * as d3 from 'd3';
 
-class AreaChart extends Component {
+class BivariateAreaChart extends Component {
     componentDidMount() {
         var margin = {
             top: 20,
@@ -17,7 +17,7 @@ class AreaChart extends Component {
             left: 50
         };
 
-        var svg = d3.select('#areaChart')
+        var svg = d3.select('#bivariateAreaChart')
             .append('svg')
             .attr('width', 600)
             .attr('height', 600);
@@ -28,40 +28,43 @@ class AreaChart extends Component {
         var g = svg.append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-        var x = d3.scaleTime()                // x轴
-                .rangeRound([0, width]),
-            y = d3.scaleLinear()              // y轴
-                .rangeRound([height, 0]);
+        var x = d3.scaleTime()
+            .rangeRound([0, width]);
 
-        // https://github.com/d3/d3-shape/blob/master/README.md#area
+        var y = d3.scaleLinear()
+            .rangeRound([height, 0]);
+
         var area = d3.area()
             .x(function (d) {
                 return x(d.date);
             })
+            .y0(function (d) {
+                return y(d.low);
+            })
             .y1(function (d) {
-                return y(d.close)
+                return y(d.high);
             });
 
-        d3.tsv('/data/areaChart.tsv', function (d) {
-            // https://github.com/d3/d3-time-format/blob/master/README.md#timeParse
-            d.date = d3.timeParse('%d-%b-%y')(d.date);
-            d.close = +d.close;
+        d3.tsv('/data/bivariateAreaChart.tsv', function (d) {
+            d.date = d3.timeParse('%Y%m%d')(d.date);
+            d.high = +d.high;
+            d.low = +d.low;
             return d;
         }, function (err, data) {
             if (err) {
                 throw err;
             }
 
-            // https://github.com/d3/d3-array/blob/master/README.md#extent
             x.domain(d3.extent(data, function (d) {
                 return d.date;
             }));
 
-            y.domain([0, d3.max(data, function (d) {
-                return d.close;
+            y.domain([d3.min(data, function (d) {
+                return d.low;
+            }), d3.max(data, function (d) {
+                return d.high;
             })]);
 
-            area.y0(y(0));
 
             // 画曲线
             g.append('path')
@@ -76,29 +79,22 @@ class AreaChart extends Component {
 
             // 画y轴
             g.append('g')
-                .call(d3.axisLeft(y))
-                .append('text')
-                .attr('fill', '#000')
-                .attr('transform', 'rotate(-90)')
-                .attr('y', 6)
-                .attr('dy', '0.71em')
-                .attr('text-anchor', 'end')
-                .text('Price ($)');
-        });
+                .call(d3.axisLeft(y));
+        })
     }
 
     render() {
         return (
-            <div id="areaChart"
+            <div id="bivariateAreaChart"
                  className="basic-demo">
                 <h3>Area Chart</h3>
                 <p className="sub-title">
                     来源：
-                    <a href="https://bl.ocks.org/mbostock/3883195">官网实例</a>
+                    <a href="https://bl.ocks.org/mbostock/3884914">官网实例</a>
                 </p>
             </div>
         );
     }
 }
 
-export default AreaChart;
+export default BivariateAreaChart;

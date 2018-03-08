@@ -40,14 +40,14 @@ class BasicDemo2 extends Component {
         const group = svg.append('g')
             .attr('transform', 'translate(40, 40)');
 
-        // x轴
-        const xAxis = group.append('g')
+        // 画x轴
+        group.append('g')
             .attr('class', 'xAxis_barChart')
             .attr('transform', 'translate(0, ' + height + ')')
             .call(d3.axisBottom(xScale));
 
-        // y轴
-        const yAxis = group.append('g')
+        // 画y轴
+        group.append('g')
             .attr('class', 'yAxis_barChart')
             .call(d3.axisLeft(yScale).ticks(5));   // ticks??
 

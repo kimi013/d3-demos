@@ -41,13 +41,13 @@ class BasicDemo3 extends Component {
             .attr('transform', 'translate(40, 40)');
 
         // x轴
-        const xAxis = group.append('g')
+        group.append('g')
             .attr('class', 'xAxis_barChart')
             .attr('transform', 'translate(0, ' + height + ')')
             .call(d3.axisBottom(xScale));   // .call 方法
 
         // y轴
-        const yAxis = group.append('g')
+        group.append('g')
             .attr('class', 'yAxis_barChart')
             .call(d3.axisLeft(yScale));
 

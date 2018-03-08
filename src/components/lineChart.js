@@ -64,7 +64,7 @@ class LineChart extends Component {
 
             // 画x轴
             g.append('g')
-                .attr('transform', 'translate(0' + ',' + height + ')')
+                .attr('transform', 'translate(0,' + height + ')')
                 .call(d3.axisBottom(x));
 
             // 画y轴

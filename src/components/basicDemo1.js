@@ -65,14 +65,14 @@ class BasicDemo1 extends Component {
          * selection.call方法:
          * https://github.com/d3/d3-selection/blob/master/README.md#selection_call
          */
-        const xAxis = group.append('g')
+        group.append('g')
             .attr('class', 'xAxis_barChart')
             .attr('transform', 'translate(0, ' + height + ')')
             .call(d3.axisBottom(xScale));
 
 
         // 添加y轴
-        const yAxis = group.append('g')
+        group.append('g')
             .attr('class', 'yAxis_barChart')
             .call(d3.axisLeft(yScale));
 
