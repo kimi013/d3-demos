@@ -90,6 +90,12 @@ const StackedBarChart = Loadable({
     loading: Loading
 });
 
+// bar chart
+const PieChart = Loadable({
+    loader: () => import ('../components/pieChart'),
+    loading: Loading
+});
+
 class AppRouter extends Component {
     render() {
         return (
@@ -114,6 +120,7 @@ class AppRouter extends Component {
                         <li className="nav-item"><Link to="/stackedAreaChart">Stacked Area Chart</Link></li>
                         <li className="nav-item"><Link to="/barChart">Bar Chart</Link></li>
                         <li className="nav-item"><Link to="/stackedBarChart">Stacked Bar Chart</Link></li>
+                        <li className="nav-item"><Link to="/pieChart">Pie Chart</Link></li>
                     </ul>
 
                     <div className="router-container">
@@ -132,6 +139,7 @@ class AppRouter extends Component {
                             <Route exact path="/stackedAreaChart" component={StackedAreaChart}/>
                             <Route exact path="/barChart" component={BarChart}/>
                             <Route exact path="/stackedBarChart" component={StackedBarChart}/>
+                            <Route exact path="/pieChart" component={PieChart}/>
                         </Switch>
                     </div>
 
