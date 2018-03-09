@@ -63,8 +63,6 @@ class StackedAreaChart extends Component {
             // https://github.com/d3/d3-shape/blob/master/README.md#stack_keys
             stack.keys(keys);
 
-            console.log(stack(data));
-
             // 每一层
             var layer = g.selectAll('.layer')
             // https://github.com/d3/d3-shape/blob/master/README.md#_stack
