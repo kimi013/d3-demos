@@ -62,8 +62,6 @@ class MultiSeriesLineChart extends Component {
                 }
             });
 
-            console.log(cities);
-
             x.domain(d3.extent(data, function (d) {
                 return d.date;
             }));
@@ -160,10 +158,7 @@ class MultiSeriesLineChart extends Component {
     render() {
         return (
             <div id="multiSeriesLineChart"
-                 className="basic-demo"
-                 style={{
-                     width: 1000
-                 }}>
+                 className="basic-demo middle">
                 <h3>Multi-Series Line Chart</h3>
                 <p className="sub-title">
                     来源：

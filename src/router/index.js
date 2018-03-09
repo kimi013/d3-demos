@@ -72,6 +72,12 @@ const MultiSeriesLineChart = Loadable({
     loading: Loading
 });
 
+// stacked area chart
+const StackedAreaChart = Loadable({
+    loader: () => import ('../components/stackedAreaChart'),
+    loading: Loading
+});
+
 class AppRouter extends Component {
     render() {
         return (
@@ -93,7 +99,7 @@ class AppRouter extends Component {
                         <li className="nav-item"><Link to="/lineChart">Line Chart</Link></li>
                         <li className="nav-item"><Link to="/bivariateAreaChart">Bivariate Area Chart</Link></li>
                         <li className="nav-item"><Link to="/multiSeriesLineChart">Multi-Series Line Chart</Link></li>
-
+                        <li className="nav-item"><Link to="/stackedAreaChart">Stacked Area Chart</Link></li>
                     </ul>
 
                     <div className="router-container">
@@ -109,6 +115,7 @@ class AppRouter extends Component {
                             <Route exact path="/lineChart" component={LineChart}/>
                             <Route exact path="/bivariateAreaChart" component={BivariateAreaChart}/>
                             <Route exact path="/multiSeriesLineChart" component={MultiSeriesLineChart}/>
+                            <Route exact path="/stackedAreaChart" component={StackedAreaChart}/>
                         </Switch>
                     </div>
 
