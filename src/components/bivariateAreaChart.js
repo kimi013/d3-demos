@@ -87,7 +87,7 @@ class BivariateAreaChart extends Component {
         return (
             <div id="bivariateAreaChart"
                  className="basic-demo">
-                <h3>Area Chart</h3>
+                <h3>Bivariate Area Chart</h3>
                 <p className="sub-title">
                     来源：
                     <a href="https://bl.ocks.org/mbostock/3884914">官网实例</a>
